@@ -1,8 +1,8 @@
 {
   "name" : "Brand",
-  "preName" : null,
+  "preName" : "",
   "comment" : null,
-  "templateGroupName" : null,
+  "templateGroupName" : "Default",
   "fullColumn" : [ {
     "name" : "id",
     "comment" : null,
@@ -19,6 +19,20 @@
     "ext" : { }
   }, {
     "name" : "price",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "message",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "image",
     "comment" : null,
     "type" : null,
     "shortType" : null,
