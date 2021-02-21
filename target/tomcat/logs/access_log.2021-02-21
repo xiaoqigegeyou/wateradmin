@@ -1,0 +1,2 @@
+127.0.0.1 - - [21/Feb/2021:00:08:17 +0800] "GET /water/vue-admin-template/table/list HTTP/1.1" 404 1021 http-bio-8080-exec-6 272
+127.0.0.1 - - [21/Feb/2021:00:20:54 +0800] "GET /water/user/info?token=15063185664 HTTP/1.1" 200 115 http-bio-8080-exec-7 506
