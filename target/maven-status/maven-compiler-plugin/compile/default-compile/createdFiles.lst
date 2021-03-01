@@ -8,6 +8,7 @@ com\water\entity\Order.class
 com\water\dao\OrderDao.class
 com\water\service\DeliverService.class
 com\water\dao\UserDao.class
+com\water\entity\OrderQuery.class
 com\water\service\OrderService.class
 com\water\controller\OrderController.class
 com\water\dao\DeliverDao.class

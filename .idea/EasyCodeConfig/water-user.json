@@ -32,7 +32,7 @@
     "custom" : false,
     "ext" : { }
   }, {
-    "name" : "role",
+    "name" : "roles",
     "comment" : null,
     "type" : null,
     "shortType" : null,
@@ -40,6 +40,20 @@
     "ext" : { }
   }, {
     "name" : "addr",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "sex",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "avatar",
     "comment" : null,
     "type" : null,
     "shortType" : null,
