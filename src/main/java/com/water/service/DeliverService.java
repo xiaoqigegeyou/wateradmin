@@ -1,6 +1,7 @@
 package com.water.service;
 
 import com.water.entity.Deliver;
+import com.water.entity.DeliverQuery;
 
 import java.util.List;
 
@@ -26,13 +27,13 @@ public interface DeliverService {
 
     /**
      * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
+     * @param deliver
+     * @return
      */
-    List<Deliver> queryAllByLimit(int offset, int limit);
+    List<Deliver> queryAllByLimit(DeliverQuery deliver);
 
+
+    List<Deliver> queryAll(DeliverQuery deliver);
     /**
      * 新增数据
      *

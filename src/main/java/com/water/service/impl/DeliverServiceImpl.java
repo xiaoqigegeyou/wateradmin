@@ -2,6 +2,7 @@ package com.water.service.impl;
 
 import com.water.entity.Deliver;
 import com.water.dao.DeliverDao;
+import com.water.entity.DeliverQuery;
 import com.water.service.DeliverService;
 import org.springframework.stereotype.Service;
 
@@ -35,17 +36,16 @@ public class DeliverServiceImpl implements DeliverService {
         return this.deliverDao.queryById(id);
     }
 
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
     @Override
-    public List<Deliver> queryAllByLimit(int offset, int limit) {
-        return this.deliverDao.queryAllByLimit(offset, limit);
+    public List<Deliver> queryAllByLimit(DeliverQuery deliver) {
+        return this.deliverDao.queryAllByLimit(deliver);
     }
+
+    @Override
+    public List<Deliver> queryAll(DeliverQuery deliver) {
+        return this.deliverDao.queryAll(deliver);
+    }
+
 
     /**
      * 新增数据

@@ -1,6 +1,7 @@
 package com.water.dao;
 
 import com.water.entity.Brand;
+import com.water.entity.BrandQuery;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,11 +29,10 @@ public interface BrandDao {
     /**
      * 查询指定行数据
      *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
+     *
      * @return 对象列表
      */
-    List<Brand> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Brand> queryAllByLimit(BrandQuery brand);
 
 
     /**
@@ -41,7 +41,7 @@ public interface BrandDao {
      * @param brand 实例对象
      * @return 对象列表
      */
-    List<Brand> queryAll(Brand brand);
+    List<Brand> queryAll( BrandQuery brand );
 
     /**
      * 新增数据

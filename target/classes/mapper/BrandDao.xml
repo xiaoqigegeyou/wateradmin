@@ -36,7 +36,24 @@
                price,
                message,
                image
-        from water.brand limit #{offset}, #{limit}
+        from water.brand
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="message != null and message != ''">
+                and message = #{message}
+            </if>
+            <if test="image != null and image != ''">
+                and image = #{image}
+            </if>
+        </where>limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->

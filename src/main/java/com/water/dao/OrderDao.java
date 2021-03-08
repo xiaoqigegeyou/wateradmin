@@ -74,6 +74,14 @@ public interface OrderDao {
      * @return 影响行数
      */
     int update(Order order);
+    /**
+     * 修改送水人员评分
+     *
+     * @param order 实例对象
+     * @return 影响行数
+     */
+    int updateDeliverRate(Integer id);
+
 
     /**
      * 通过主键删除数据

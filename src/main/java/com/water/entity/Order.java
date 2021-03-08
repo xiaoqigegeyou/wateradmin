@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @Data
 public class Order implements Serializable {
+
     private static final long serialVersionUID = 266133771645596038L;
 
     private Integer id;
@@ -60,6 +61,8 @@ public class Order implements Serializable {
     private String text;
 
     private Integer uid;
+
+    private Integer did;
 
 
 }

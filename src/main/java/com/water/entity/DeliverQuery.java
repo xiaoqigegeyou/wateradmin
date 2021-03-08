@@ -5,15 +5,19 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * (Deliver)实体类
- *
- * @author makejava
- * @since 2021-02-21 16:33:33
+ * @author LFZ
+ * @date 2021/3/2 - 22:11
  */
 @Data
-public class Deliver implements Serializable {
+public class DeliverQuery  implements Serializable {
 
-    private static final long serialVersionUID = 273502702693075866L;
+    private static final long serialVersionUID = 266133771645596034L;
+
+    private Integer page;
+
+    private Integer limit;
+
+    private Integer offset;
 
     private Integer id;
     /**
@@ -32,6 +36,5 @@ public class Deliver implements Serializable {
      * 平均分
      */
     private Double rate;
-
 
 }

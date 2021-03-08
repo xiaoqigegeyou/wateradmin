@@ -52,6 +52,10 @@ public interface OrderService {
      */
     Order update(Order order);
 
+
+
+    boolean updateDeliverRate(Integer id);
+
     /**
      * 通过主键删除数据
      *

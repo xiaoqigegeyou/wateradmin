@@ -2,6 +2,7 @@ package com.water.service.impl;
 
 import com.water.entity.Brand;
 import com.water.dao.BrandDao;
+import com.water.entity.BrandQuery;
 import com.water.service.BrandService;
 import org.springframework.stereotype.Service;
 
@@ -35,16 +36,14 @@ public class BrandServiceImpl implements BrandService {
         return this.brandDao.queryById(id);
     }
 
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
     @Override
-    public List<Brand> queryAllByLimit(int offset, int limit) {
-        return this.brandDao.queryAllByLimit(offset, limit);
+    public List<Brand> queryAllByLimit(BrandQuery brand) {
+        return this.brandDao.queryAllByLimit(brand);
+    }
+
+    @Override
+    public List<Brand> queryAll(BrandQuery brand) {
+        return this.brandDao.queryAll(brand);
     }
 
     /**

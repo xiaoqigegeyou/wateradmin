@@ -3,6 +3,8 @@ D:\IDEA\wateradmin\src\main\java\com\water\dao\OrderDao.java
 D:\IDEA\wateradmin\src\main\java\com\water\entity\Order.java
 D:\IDEA\wateradmin\src\main\java\com\water\service\BrandService.java
 D:\IDEA\wateradmin\src\main\java\com\water\entity\Deliver.java
+D:\IDEA\wateradmin\src\main\java\com\water\entity\DeliverQuery.java
+D:\IDEA\wateradmin\src\main\java\com\water\entity\BrandQuery.java
 D:\IDEA\wateradmin\src\main\java\com\water\controller\UserController.java
 D:\IDEA\wateradmin\src\main\java\com\water\dao\BrandDao.java
 D:\IDEA\wateradmin\src\main\java\com\water\controller\BrandController.java

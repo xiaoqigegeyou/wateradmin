@@ -17,6 +17,7 @@
         <result property="flag" column="flag" jdbcType="INTEGER"/>
         <result property="text" column="text" jdbcType="VARCHAR"/>
         <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="did" column="did" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
@@ -152,8 +153,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into water.order(name, tell, bname, price, person, starttime, appointmenttime,endtime, addr, rate)
-        values (#{name}, #{tell}, #{bname}, #{price}, #{person}, #{starttime}, #{appointmenttime}, #{endtime}, #{addr}, #{rate})
+        insert into water.order(name, tell, bname, price, person, starttime, appointmenttime,endtime, addr, rate,uid,did)
+        values (#{name}, #{tell}, #{bname}, #{price}, #{person}, #{starttime}, #{appointmenttime}, #{endtime}, #{addr}, #{rate}, #{uid}, #{did})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
@@ -217,6 +218,20 @@
             </if>
         </set>
         where id = #{id}
+    </update>
+    <!--通过主键修改送水人员评分-->
+    <update id="updateDeliverRate">
+        UPDATE deliver
+        <set>
+            rate = (
+            SELECT AVG( rate )
+            FROM WATER.ORDER
+            WHERE did = ( SELECT
+            did
+            FROM water.ORDER
+            WHERE id = #{id} ) )
+        </set>
+        where id = ( SELECT did a FROM water.ORDER WHERE id = #{id} )
     </update>
 
     <!--通过主键删除-->

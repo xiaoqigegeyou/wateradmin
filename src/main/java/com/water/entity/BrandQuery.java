@@ -5,15 +5,19 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * (Brand)实体类
- *
- * @author makejava
- * @since 2021-02-21 16:33:32
+ * @author LFZ
+ * @date 2021/3/2 - 22:11
  */
 @Data
-public class Brand implements Serializable {
+public class BrandQuery  implements Serializable {
 
-    private static final long serialVersionUID = -21281986084170145L;
+    private static final long serialVersionUID = 266133771645596038L;
+
+    private Integer page;
+
+    private Integer limit;
+
+    private Integer offset;
 
     private Integer id;
     /**
@@ -32,7 +36,4 @@ public class Brand implements Serializable {
      * 头像，暂无图片上传功能，一律使用公网图片地址
      */
     private String image;
-
-
-
 }

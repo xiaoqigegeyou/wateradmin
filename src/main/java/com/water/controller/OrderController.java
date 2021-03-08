@@ -1,7 +1,9 @@
 package com.water.controller;
 
+import com.water.entity.Deliver;
 import com.water.entity.Order;
 import com.water.entity.OrderQuery;
+import com.water.service.DeliverService;
 import com.water.service.OrderService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,8 @@ public class OrderController {
      */
     @Resource
     private OrderService orderService;
-
+    @Resource
+    private DeliverService deliverService;
     /**
      *
      * @param o
@@ -36,6 +39,8 @@ public class OrderController {
     @RequestMapping("insert")
     public Map<String, Object> insert(@RequestBody Order o) throws Exception {
         Map<String, Object> result = new HashMap<>();
+       Deliver d= deliverService.queryById(o.getDid());
+       o.setPerson(d.getName());
         System.out.println(o);
        orderService.insert(o);
         result.put("code", 20000);
@@ -64,26 +69,32 @@ public class OrderController {
         Map<String, Object> result = new HashMap<>();
         Order n=new Order();
         n.setId(o.getId());
-        n.setFlag(o.getFlag()+1);
-        n.setEndtime(o.getEndtime());
-        n.setRate(o.getRate());
-        n.setText(o.getText());
+
+        if(o.getFlag()==1){
+            n.setFlag(2);
+            n.setEndtime(o.getEndtime());
+            orderService.update(n);
+        }else if(o.getFlag()==2){
+            n.setFlag(3);
+            n.setRate(o.getRate());
+            n.setText(o.getText());
+            orderService.update(n);
+            orderService.updateDeliverRate(n.getId());
+        }
         System.out.println(n);
-        orderService.update(n);
+
         result.put("code", 20000);
         result.put("data", "success");
         return result;
     }
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @RequestMapping("selectOne")
-    public Order selectOne(Integer id) {
-        return this.orderService.queryById(id);
-    }
 
+    @RequestMapping("deleteorder")
+    public  Map<String, Object> deleteorder(@RequestBody Integer id) {
+        Map<String, Object> result = new HashMap<>();
+        orderService.deleteById(id);
+        result.put("code", 20000);
+        result.put("data", "success");
+        return result;
+    }
 }

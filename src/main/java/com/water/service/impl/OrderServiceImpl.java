@@ -69,7 +69,11 @@ public class OrderServiceImpl implements OrderService {
         this.orderDao.update(order);
         return this.queryById(order.getId());
     }
+    @Override
+    public boolean updateDeliverRate(Integer id) {
+        return this.orderDao.updateDeliverRate(id)>0;
 
+    }
     /**
      * 通过主键删除数据
      *

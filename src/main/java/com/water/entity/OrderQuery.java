@@ -2,6 +2,7 @@ package com.water.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * @date 2021/2/26 - 21:58
  */
 @Data
-public class OrderQuery {
+public class OrderQuery  implements Serializable {
     private static final long serialVersionUID = 266133771645596032L;
 
     private Integer page;
@@ -64,5 +65,7 @@ public class OrderQuery {
     private String text;
 
     private Integer uid;
+
+    private Integer did;
 
 }
