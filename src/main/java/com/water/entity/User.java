@@ -32,6 +32,10 @@ public class User implements Serializable {
      */
     private Integer roles;
     /**
+     * 区域
+     */
+    private String area;
+    /**
      * 地址
      */
     private String addr;

@@ -36,4 +36,18 @@ public class BrandQuery  implements Serializable {
      * 头像，暂无图片上传功能，一律使用公网图片地址
      */
     private String image;
+
+    /**
+     * 容量
+     */
+    private String capacity;
+    /**
+     * 保质期
+     */
+    private String warranty;
+    /**
+     * 成分
+     */
+    private String composition;
+
 }

@@ -8,6 +8,9 @@
         <result property="price" column="price" jdbcType="NUMERIC"/>
         <result property="message" column="message" jdbcType="VARCHAR"/>
         <result property="image" column="image" jdbcType="VARCHAR"/>
+        <result property="capacity" column="capacity" jdbcType="VARCHAR"/>
+        <result property="warranty" column="warranty" jdbcType="VARCHAR"/>
+        <result property="composition" column="composition" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
@@ -16,7 +19,10 @@
                name,
                price,
                message,
-               image
+               image,
+               capacity,
+               warranty,
+               composition
         from water.brand
         where id = #{id}
     </select>
@@ -26,7 +32,10 @@
                name,
                price,
                message,
-               image
+               image,
+               capacity,
+               warranty,
+               composition
         from water.brand
     </select>
     <!--查询指定行数据-->
@@ -35,7 +44,10 @@
                name,
                price,
                message,
-               image
+               image,
+                capacity,
+                warranty,
+                composition
         from water.brand
         <where>
             <if test="id != null">
@@ -53,13 +65,23 @@
             <if test="image != null and image != ''">
                 and image = #{image}
             </if>
+            <if test="capacity != null and capacity != ''">
+                and capacity = #{capacity},
+            </if>
+            <if test="warranty != null and warranty != ''">
+                and warranty = #{warranty},
+            </if><if test="composition != null and composition != ''">
+                 and composition = #{composition},
+        </if>
         </where>limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BrandMap">
         select
-        id, name, price, message, image
+        id, name, price, message, image, capacity,
+        warranty,
+        composition
         from water.brand
         <where>
             <if test="id != null">
@@ -77,20 +99,32 @@
             <if test="image != null and image != ''">
                 and image = #{image}
             </if>
+            <if test="capacity != null and capacity != ''">
+                capacity = #{capacity},
+            </if>
+            <if test="warranty != null and warranty != ''">
+                warranty = #{warranty},
+            </if><if test="composition != null and composition != ''">
+            composition = #{composition},
+        </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into water.brand(name, price, message, image)
-        values (#{name}, #{price}, #{message}, #{image})
+        insert into water.brand(name, price, message, image, capacity,
+                                warranty,
+                                composition)
+        values (#{name}, #{price}, #{message}, #{image},#{capacity},#{warranty},#{composition})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into water.brand(name, price, message, image)
+        insert into water.brand(name, price, message, image, capacity,
+        warranty,
+        composition)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name}, #{entity.price}, #{entity.message}, #{entity.image})
+            (#{entity.name}, #{entity.price}, #{entity.message}, #{entity.image},#{entity.capacity},#{entity.warranty},#{entity.composition})
         </foreach>
     </insert>
 
@@ -120,6 +154,15 @@
             <if test="image != null and image != ''">
                 image = #{image},
             </if>
+            <if test="capacity != null and capacity != ''">
+                capacity = #{capacity},
+            </if>
+            <if test="warranty != null and warranty != ''">
+                warranty = #{warranty},
+            </if><if test="composition != null and composition != ''">
+            composition = #{composition},
+        </if>
+
         </set>
         where id = #{id}
     </update>

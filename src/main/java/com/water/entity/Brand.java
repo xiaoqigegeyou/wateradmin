@@ -8,12 +8,11 @@ import java.io.Serializable;
  * (Brand)实体类
  *
  * @author makejava
- * @since 2021-02-21 16:33:32
+ * @since 2021-04-05 16:36:53
  */
 @Data
 public class Brand implements Serializable {
-
-    private static final long serialVersionUID = -21281986084170145L;
+    private static final long serialVersionUID = -13869580843746974L;
 
     private Integer id;
     /**
@@ -32,6 +31,18 @@ public class Brand implements Serializable {
      * 头像，暂无图片上传功能，一律使用公网图片地址
      */
     private String image;
+    /**
+     * 容量
+     */
+    private String capacity;
+    /**
+     * 保质期
+     */
+    private String warranty;
+    /**
+     * 成分
+     */
+    private String composition;
 
 
 

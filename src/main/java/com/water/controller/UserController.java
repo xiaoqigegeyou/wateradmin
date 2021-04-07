@@ -97,7 +97,7 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
         System.out.println(o);
 
-//        userService.insert(o);
+        userService.insert(o);
         result.put("code", 20000);
         result.put("data","success");
         return result;
