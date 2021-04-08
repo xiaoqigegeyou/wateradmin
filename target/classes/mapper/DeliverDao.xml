@@ -18,7 +18,7 @@
                sex,
                rate
         from water.deliver
-        where id = #{id}
+        where id = #{id} ORDER BY id desc
     </select>
     <!--查询所有数据-->
     <select id="query" resultMap="DeliverMap">
@@ -27,7 +27,7 @@
                tell,
                sex,
                rate
-        from water.deliver
+        from water.deliver ORDER BY id desc
     </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="DeliverMap">
@@ -53,7 +53,7 @@
             <if test="rate != null">
                 and rate = #{rate}
             </if>
-        </where> limit #{offset}, #{limit}
+        </where>  ORDER BY id desc limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
@@ -77,7 +77,7 @@
             <if test="rate != null">
                 and rate = #{rate}
             </if>
-        </where>
+        </where> ORDER BY id desc
     </select>
 
     <!--新增所有列-->

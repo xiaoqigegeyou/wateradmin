@@ -36,7 +36,7 @@
                flag,
                text
         from water.order
-        where id = #{id}
+        where id = #{id} ORDER BY id desc
     </select>
     <!--查询所有数据-->
     <select id="query" resultMap="OrderMap">
@@ -53,7 +53,7 @@
                rate,
                flag,
                text
-        from water.order
+        from water.order ORDER BY id desc
     </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="OrderMap">
@@ -100,7 +100,7 @@
             <if test="uid != null">
                 and uid = #{uid}
             </if>
-        </where>  limit #{offset}, #{limit}
+        </where>  ORDER BY id desc limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
@@ -148,7 +148,7 @@
             <if test="uid != null">
                 and uid = #{uid}
             </if>
-        </where>
+        </where> ORDER BY id desc
     </select>
 
     <!--新增所有列-->
