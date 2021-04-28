@@ -1,18 +1,18 @@
 package com.water.dao;
 
-import com.water.entity.Order;
-import com.water.entity.OrderQuery;
+import com.water.entity.Inwater;
+import com.water.entity.InwaterQuery;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * (Order)表数据库访问层
+ * (Inwater)表数据库访问层
  *
  * @author makejava
- * @since 2021-02-21 16:33:35
+ * @since 2021-04-27 21:24:08
  */
-public interface OrderDao {
+public interface InwaterDao {
 
     /**
      * 通过ID查询单条数据
@@ -20,67 +20,59 @@ public interface OrderDao {
      * @param id 主键
      * @return 实例对象
      */
-    Order queryById(Integer id);
+    Inwater queryById(Integer id);
     /**
      * 查询全部数
      * @return 实例对象
      */
-    List<Order> query();
+    List<Inwater> query();
+
     /**
      * 查询指定行数据
-     *
-     *
      * @return 对象列表
      */
-    List<Order> queryAllByLimit(OrderQuery order);
+    List<Inwater> queryAllByLimit(InwaterQuery inwaterQuery);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param order 实例对象
+     * @param inwaterQuery 实例对象
      * @return 对象列表
      */
-    List<Order> queryAll( OrderQuery order );
+    List<Inwater> queryAll(InwaterQuery inwaterQuery);
 
     /**
      * 新增数据
      *
-     * @param order 实例对象
+     * @param inwater 实例对象
      * @return 影响行数
      */
-    int insert(Order order);
+    int insert(Inwater inwater);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *
-     * @param entities List<Order> 实例对象列表
+     * @param entities List<Inwater> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<Order> entities);
+    int insertBatch(@Param("entities") List<Inwater> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
      *
-     * @param entities List<Order> 实例对象列表
+     * @param entities List<Inwater> 实例对象列表
      * @return 影响行数
      */
-    int insertOrUpdateBatch(@Param("entities") List<Order> entities);
+    int insertOrUpdateBatch(@Param("entities") List<Inwater> entities);
 
     /**
      * 修改数据
      *
-     * @param order 实例对象
+     * @param inwater 实例对象
      * @return 影响行数
      */
-    int update(Order order);
-    /**
-     * 修改送水人员评分
-     *
-     * @return 影响行数
-     */
-    int updateDeliverRate(Integer id);
-
+    int update(Inwater inwater);
 
     /**
      * 通过主键删除数据
@@ -90,5 +82,6 @@ public interface OrderDao {
      */
     int deleteById(Integer id);
 
+    int updateInNumber(@Param("bid") Integer bid);
 }
 

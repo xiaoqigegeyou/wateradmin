@@ -68,4 +68,5 @@ public class OrderQuery  implements Serializable {
 
     private Integer did;
 
+    private  Integer number;
 }

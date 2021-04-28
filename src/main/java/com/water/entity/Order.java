@@ -64,5 +64,7 @@ public class Order implements Serializable {
 
     private Integer did;
 
+    private  Integer number;
+
 
 }

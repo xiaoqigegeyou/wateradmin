@@ -18,6 +18,8 @@
         <result property="text" column="text" jdbcType="VARCHAR"/>
         <result property="uid" column="uid" jdbcType="INTEGER"/>
         <result property="did" column="did" jdbcType="INTEGER"/>
+        <result property="number" column="number" jdbcType="INTEGER"/>
+
     </resultMap>
 
     <!--查询单个-->
@@ -34,7 +36,8 @@
                addr,
                rate,
                flag,
-               text
+               text,
+               number
         from water.order
         where id = #{id} ORDER BY id desc
     </select>
@@ -52,13 +55,14 @@
                addr,
                rate,
                flag,
-               text
+               text,
+               number
         from water.order ORDER BY id desc
     </select>
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="OrderMap">
         select
-        id, name, tell, bname, price, person, starttime, appointmenttime, endtime, addr, rate, flag ,text
+        id, name, tell, bname, price, person, starttime, appointmenttime, endtime, addr, rate, flag ,text,number
         from water.order
         <where>
             <if test="id != null">
@@ -106,7 +110,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="OrderMap">
         select
-        id, name, tell, bname, price, person, starttime, appointmenttime, endtime, addr, rate, flag ,text
+        id, name, tell, bname, price, person, starttime, appointmenttime, endtime, addr, rate, flag ,text,number
         from water.order
         <where>
             <if test="id != null">
@@ -153,8 +157,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into water.order(name, tell, bname, price, person, starttime, appointmenttime,endtime, addr, rate,uid,did)
-        values (#{name}, #{tell}, #{bname}, #{price}, #{person}, #{starttime}, #{appointmenttime}, #{endtime}, #{addr}, #{rate}, #{uid}, #{did})
+        insert into water.order(name, tell, bname, price, person, starttime, appointmenttime,endtime, addr, rate,uid,did,number)
+        values (#{name}, #{tell}, #{bname}, #{price}, #{person}, #{starttime}, #{appointmenttime}, #{endtime}, #{addr}, #{rate}, #{uid}, #{did},#{number})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">

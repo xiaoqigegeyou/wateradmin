@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.water.dao.InandoutDao">
+
+    <resultMap type="com.water.entity.Inandout" id="InandoutMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="location" column="location" jdbcType="VARCHAR"/>
+        <result property="bid" column="bid" jdbcType="INTEGER"/>
+        <result property="innumber" column="inNumber" jdbcType="INTEGER"/>
+        <result property="outnumber" column="outNumber" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="InandoutMap">
+        select id,
+               location,
+               bid,
+               inNumber,
+               outNumber
+        from water.inandout
+        where id = #{id}
+    </select>
+    <select id="query" resultMap="InandoutMap">
+        select id,
+               location,
+               bid,
+               inNumber,
+               outNumber
+        from water.inandout
+        ORDER BY id desc
+    </select>
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="InandoutMap">
+        select id,
+               location,
+               bid,
+               inNumber,
+               outNumber
+        from water.inandout <where>
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="location != null and location != ''">
+            and location = #{location}
+        </if>
+        <if test="bid != null">
+            and bid = #{bid}
+        </if>
+        <if test="innumber != null">
+            and inNumber = #{innumber}
+        </if>
+        <if test="outnumber != null">
+            and outNumber = #{outnumber}
+        </if>
+    </where> ORDER BY id desc limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="InandoutMap">
+        select
+        id, location, bid, inNumber, outNumber
+        from water.inandout
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="location != null and location != ''">
+                and location = #{location}
+            </if>
+            <if test="bid != null">
+                and bid = #{bid}
+            </if>
+            <if test="innumber != null">
+                and inNumber = #{innumber}
+            </if>
+            <if test="outnumber != null">
+                and outNumber = #{outnumber}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into water.inandout(location, bid, inNumber, outNumber)
+        values (#{location}, #{bid}, #{innumber}, #{outnumber})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into water.inandout(location, bid, inNumber, outNumber)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.location}, #{entity.bid}, #{entity.innumber}, #{entity.outnumber})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into water.inandout(location, bid, inNumber, outNumber)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.location}, #{entity.bid}, #{entity.innumber}, #{entity.outnumber})
+        </foreach>
+        on duplicate key update
+        location = values(location) , bid = values(bid) , inNumber = values(inNumber) , outNumber = values(outNumber)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update water.inandout
+        <set>
+            <if test="location != null and location != ''">
+                location = #{location},
+            </if>
+            <if test="bid != null">
+                bid = #{bid},
+            </if>
+            <if test="innumber != null">
+                inNumber = #{innumber},
+            </if>
+            <if test="outnumber != null">
+                outNumber = #{outnumber},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from water.inandout
+        where id = #{id}
+    </delete>
+
+</mapper>
+

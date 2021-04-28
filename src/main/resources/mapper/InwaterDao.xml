@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.water.dao.InwaterDao">
+
+    <resultMap type="com.water.entity.Inwater" id="InwaterMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="bid" column="bid" jdbcType="INTEGER"/>
+        <result property="intime" column="inTime" jdbcType="TIMESTAMP"/>
+        <result property="protime" column="proTime" jdbcType="TIMESTAMP"/>
+        <result property="innumber" column="inNumber" jdbcType="INTEGER"/>
+        <result property="did" column="did" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="InwaterMap">
+        select id,
+               bid,
+               inTime,
+               proTime,
+               inNumber,
+               did
+        from water.inwater
+        where id = #{id}
+    </select>
+    <select id="query" resultMap="InwaterMap">
+        select id,
+               bid,
+               inTime,
+               proTime,
+               inNumber,
+               did
+        from water.inwater ORDER BY id desc
+    </select>
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="InwaterMap">
+        select id,
+               bid,
+               inTime,
+               proTime,
+               inNumber,
+               did
+        from water.inwater
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="bid != null">
+                and bid = #{bid}
+            </if>
+            <if test="intime != null">
+                and inTime = #{intime}
+            </if>
+            <if test="protime != null">
+                and proTime = #{protime}
+            </if>
+            <if test="innumber != null">
+                and inNumber = #{innumber}
+            </if>
+            <if test="did != null">
+                and did = #{did}
+            </if>
+        </where> ORDER BY id desc limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="InwaterMap">
+        select
+        id, bid, inTime, proTime, inNumber, did
+        from water.inwater
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="bid != null">
+                and bid = #{bid}
+            </if>
+            <if test="intime != null">
+                and inTime = #{intime}
+            </if>
+            <if test="protime != null">
+                and proTime = #{protime}
+            </if>
+            <if test="innumber != null">
+                and inNumber = #{innumber}
+            </if>
+            <if test="did != null">
+                and did = #{did}
+            </if>
+        </where> ORDER BY id desc
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into water.inwater(bid, inTime, proTime, inNumber, did)
+        values (#{bid}, #{intime}, #{protime}, #{innumber}, #{did})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into water.inwater(bid, inTime, proTime, inNumber, did)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.bid}, #{entity.intime}, #{entity.protime}, #{entity.innumber}, #{entity.did})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into water.inwater(bid, inTime, proTime, inNumber, did)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.bid}, #{entity.intime}, #{entity.protime}, #{entity.innumber}, #{entity.did})
+        </foreach>
+        on duplicate key update
+        bid = values(bid) , inTime = values(inTime) , proTime = values(proTime) , inNumber = values(inNumber) , did =
+        values(did)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update water.inwater
+        <set>
+            <if test="bid != null">
+                bid = #{bid},
+            </if>
+            <if test="intime != null">
+                inTime = #{intime},
+            </if>
+            <if test="protime != null">
+                proTime = #{protime},
+            </if>
+            <if test="innumber != null">
+                inNumber = #{innumber},
+            </if>
+            <if test="did != null">
+                did = #{did},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateInNumber">
+        UPDATE water.inandout
+        SET inNumber = (
+            SELECT
+                sum( inNumber )
+            FROM
+                inwater
+            WHERE
+                bid = #{bid}
+            GROUP BY
+                bid
+        )
+        WHERE
+            bid = #{bid}
+    </update>
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from water.inwater
+        where id = #{id}
+    </delete>
+
+</mapper>
+

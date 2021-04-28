@@ -1,8 +1,9 @@
 package com.water.service.impl;
 
-import com.water.entity.Order;
+import com.water.dao.BrandDao;
 import com.water.dao.OrderDao;
-import com.water.entity.OrderQuery;
+import com.water.dao.OutwaterDao;
+import com.water.entity.*;
 import com.water.service.OrderService;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,10 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Resource
     private OrderDao orderDao;
+    @Resource
+    private OutwaterDao outwaterDao;
+    @Resource
+    private BrandDao brandDao;
 
     @Override
     public List<Order> query() {
@@ -55,6 +60,17 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order insert(Order order ) {
         this.orderDao.insert(order);
+        Outwater out =new Outwater();
+        BrandQuery b=new BrandQuery();
+        b.setName(order.getBname());
+        List<Brand> c=brandDao.queryAll(b);
+
+        out.setBid(c.get(0).getId());
+        out.setOuttime(order.getStarttime());
+        out.setOutnumber(order.getNumber());
+        out.setDid(order.getDid());
+        outwaterDao.insert(out);
+        outwaterDao.updateOutNumber(out.getBid());
         return order;
     }
 
