@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,14 +63,21 @@ public class UserController {
     public
     Map<String, Object> info(String token) throws Exception {
         Map<String, Object> result = new HashMap<>();
+        result.put("code", 20000);
        // List<User> l= new ArrayList<>();
         if(token!=null){
             System.out.println(token);
             User u=new User();
             u.setTell(token);
-            result.put("code", 20000);
-            result.put("data",userService.queryAll(u).get(0));
+            List<User> u2=userService.queryAll(u);
+            if(u2.size()==0){
+
+                result.put("data",0);
+            }else{
+                result.put("data",u2.get(0));
+            }
         }
+
           return result;
 
     }
