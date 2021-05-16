@@ -98,6 +98,29 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public boolean deleteById(Integer id) {
-        return this.orderDao.deleteById(id) > 0;
+        OrderQuery orderQuery = new OrderQuery();
+        orderQuery.setId(id);
+        List<Order> order=orderDao.queryAll(orderQuery);
+        Order order1 = order.get(0);
+
+        BrandQuery brandQuery = new BrandQuery();
+        brandQuery.setName(order1.getBname());
+        List<Brand> brands = brandDao.queryAll(brandQuery);
+        Brand brand = brands.get(0);
+
+        OutwaterQuery outwater = new OutwaterQuery();
+        outwater.setDid(order1.getDid());
+        outwater.setOutnumber(order1.getNumber());
+        outwater.setBid(brand.getId());
+        outwater.setOuttime(order1.getStarttime());
+
+        List<Outwater> outwaters = outwaterDao.queryAll(outwater);
+        Outwater outwater1 = outwaters.get(0);
+
+        outwaterDao.deleteById(outwater1.getId());
+        boolean b = this.orderDao.deleteById(id) > 0;
+        outwaterDao.updateOutNumber(brand.getId());
+
+        return b;
     }
 }

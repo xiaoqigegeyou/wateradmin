@@ -69,7 +69,7 @@ public class UserController {
             System.out.println(token);
             User u=new User();
             u.setTell(token);
-            List<User> u2=userService.queryAll(u);
+            List<User> u2 = userService.queryAll(u);
             if(u2.size()==0){
 
                 result.put("data",0);
